@@ -221,7 +221,7 @@ cd bugbounty
 mkdir target
 cd target
 ```
-3. Subdomain Enumeration
+2. Subdomain Enumeration
 Use multiple tools to discover subdomains for a comprehensive view.
 ```
 sublist3r -d example.com -b -t 50 -v -o sublist3r.txt
@@ -229,7 +229,7 @@ subextreme -w ~/SecLists/Discovery/DNS/subdomains.txt -d example.com -c 100 -o s
 Combine and deduplicate the results:
 cat sublist3r.txt subextreme.txt | urldedupe -s > subdomains.txt
 ```
-5. URL Discovery (Waymore)
+3. URL Discovery (Waymore)
 Passively discover URLs from the enumerated subdomains.
 ```
 waymore -i subdomains.txt -o waymore_urls.txt
@@ -237,12 +237,12 @@ Extract unique URLs:
 cat waymore_urls.txt | urldedupe > unique_urls.txt
 ```
 
-5. Proxy URLs through Burp Suite
+4. Proxy URLs through Burp Suite
 Send the discovered URLs through Burp Suite for passive analysis and traffic inspection.
 ```
 passurls -p 127.0.0.1:8080 -i unique_urls.txt
 ```
-7. Deep Crawling (Through Proxy)
+5. Deep Crawling (Through Proxy)
 Perform an active, deep crawl of the target while routing all traffic through Burp Suite for detailed inspection. Warning: This is resource-intensive.
 Set environment variables to use the proxy:
 ```
@@ -250,7 +250,7 @@ export http_proxy="http://127.0.0.1:8080"
 export https_proxy="http://127.0.0.1:8080"
 export ALL_PROXY="http://127.0.0.1:8080"
 ```
-Run Crawley with specific options:
+6 .Run Crawley with specific options:
 ```
 crawley --headless --delay 30ms --depth -1 --subdomains --all --timeout 30s --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" https://example.com/ | tee crawley.txt
 ```
@@ -263,12 +263,12 @@ grep -E "\?.*=" burp-results.txt > burp-params.txt
 Deduplicate the parameters:
 cat burp-params.txt | urldedupe -w > parameters.txt
 ```
-9. Discover Hidden Parameters
+8. Discover Hidden Parameters
 Use Arjun to find parameters not discovered through crawling.
 ```
 arjun -i urls.txt -t 10 -T 80 -d 40 -pb http://127.0.0.1:8080 -m POST -o hidden-params.txt
 ```
-11. XSS Vulnerability Scanning
+9. XSS Vulnerability Scanning
 Scan all discovered parameters for XSS vulnerabilities using Dalfox.
 ```
 dalfox file parameters.txt --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" --timeout 30 --proxy http://127.0.0.1:8080 -o dalfox.txt --deep-domxss
