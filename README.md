@@ -20,7 +20,7 @@ A comprehensive guide for setting up a web application security testing environm
 - [Disclaimer](#disclaimer)
 
 ## System & Language Installation
-
+```bash
 Python 3 Installation
 Run the following commands to install Python 3, pip, and virtual environment support:
 sudo apt-get update -y
