@@ -1,6 +1,6 @@
 # Web Application Penetration Testing Toolkit
 
-A comprehensive guide for setting up a web application security testing environment and conducting reconnaissance for bug bounty hunting.
+A comprehensive guide for setting up a web application security testing environment and conducting reconnaissance .
 
 ## 🚀 Quick Start
 
@@ -20,9 +20,10 @@ A comprehensive guide for setting up a web application security testing environm
 - [Disclaimer](#disclaimer)
 
 ## System & Language Installation
-```bash
+
 Python 3 Installation
 Run the following commands to install Python 3, pip, and virtual environment support:
+```bash
 sudo apt-get update -y
 sudo apt-get dist-upgrade -y
 sudo apt install -y python3 python3-pip python3.12-venv
