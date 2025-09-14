@@ -213,3 +213,14 @@ cd recon/$TARGET
 
 # Run full recon
 ../scripts/full_recon.sh $TARGET
+
+
+
+Python 3 Installation
+Run the following commands to install Python 3, pip, and virtual environment support:
+sudo apt-get update -y
+sudo apt-get dist-upgrade -y
+sudo apt install -y python3 python3-pip python3.12-venv
+Verify the installation with:
+python3 --version
+pip3 --version
